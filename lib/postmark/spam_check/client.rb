@@ -32,6 +32,7 @@ module Postmark
       def http_request(params)
         uri = URI.parse(SPAM_CHECK_URI)
         http = Net::HTTP.new(uri.host, uri.port)
+        http.use_ssl = true
         http.read_timeout = @timeout
         request = Net::HTTP::Post.new(uri.request_uri, {'Content-Type' =>'application/json'})
         request.body = params.to_json
